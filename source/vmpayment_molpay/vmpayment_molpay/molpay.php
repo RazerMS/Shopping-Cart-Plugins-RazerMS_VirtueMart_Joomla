@@ -107,7 +107,7 @@ class plgVMPaymentMolpay extends vmPSPlugin {
             'country' => $country,
             'orderid' => $order['details']['BT']->order_number,
             "amount" => $totalInPaymentCurrency,
-            "cur" => $paymentCurrency,
+            "cur" => $paymentCurrency->_vendorCurrency_code_3,
             "bill_desc" => "Buy products from ".$martname.". Order No: ".$order['details']['BT']->order_number,
             "notify_url" => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginnotification&tmpl=component'),			
             "returnurl" => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&vkey='.$method->molpay_verifykey.'&pm=' . $order['details']['BT']->virtuemart_paymentmethod_id),
@@ -133,7 +133,7 @@ class plgVMPaymentMolpay extends vmPSPlugin {
         $html .= ' <script type="text/javascript">';
         $html .= ' document.vm_molpay_form.submit();';
         $html .= ' </script>';
-
+        
         //2 = don't delete the cart, don't send email and don't redirect
         return $this->processConfirmedOrderPaymentResponse(2, $cart, $order, $html, $new_status);
     }
@@ -351,7 +351,7 @@ class plgVMPaymentMolpay extends vmPSPlugin {
      * Create the table for this plugin if it does not yet exist.
      * This functions checks if the called plugin is active one.
      * When yes it is calling the standard method to create the tables
-     * @author ValÃ©rie Isaksen
+     * @author ValÃƒÂ©rie Isaksen
      *
      */
     function plgVmOnStoreInstallPaymentPluginTable($jplugin_id) {
@@ -362,7 +362,7 @@ class plgVMPaymentMolpay extends vmPSPlugin {
      * additional payment info in the cart.
      *
      * @author Max Milbers
-     * @author ValÃ©rie isaksen
+     * @author ValÃƒÂ©rie isaksen
      *
      * @param VirtueMartCart $cart: the actual cart
      * @return null if the payment was not selected, true if the data is valid, error message if the data is not vlaid
