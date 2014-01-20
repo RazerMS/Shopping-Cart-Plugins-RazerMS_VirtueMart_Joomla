@@ -107,7 +107,7 @@ class plgVMPaymentMolpay extends vmPSPlugin {
             'country' => $country,
             'orderid' => $order['details']['BT']->order_number,
             "amount" => $totalInPaymentCurrency,
-            "cur" => $currency_code_3,
+            "cur" => $paymentCurrency,
             "bill_desc" => "Buy products from ".$martname.". Order No: ".$order['details']['BT']->order_number,
             "notify_url" => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginnotification&tmpl=component'),			
             "returnurl" => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&vkey='.$method->molpay_verifykey.'&pm=' . $order['details']['BT']->virtuemart_paymentmethod_id),
