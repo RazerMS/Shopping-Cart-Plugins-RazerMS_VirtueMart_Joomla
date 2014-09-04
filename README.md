@@ -6,7 +6,7 @@ MOLPay Plugin for Joomla VirtueMart Shopping Cart developed by MOLPay R&D team.
 
 Supported version
 -----------------
-Joomla 2.5.x and VirtueMart 2.0.x
+Joomla 2.5.x and VirtueMart 2.6.x
 
 Notes
 -----
