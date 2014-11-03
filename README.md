@@ -42,7 +42,7 @@ Installations
   - Shopper Group : -ignore-
   - List Order : -ignore-  
   
-9. On the configuration tab, fill the required fiels.
+9. On the configuration tab, fill the required fields.
   - MOLPay Merchant ID
   - MOLPay Verify Key
 
