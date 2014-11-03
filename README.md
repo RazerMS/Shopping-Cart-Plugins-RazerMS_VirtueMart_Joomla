@@ -43,6 +43,8 @@ Installations
   - List Order : -ignore-  
   
 9. On the configuration tab, fill the required fiels.
+  - MOLPay Merchant ID
+  - MOLPay Verify Key
 
 10. Save the configuration and test with our sandbox account.
 
