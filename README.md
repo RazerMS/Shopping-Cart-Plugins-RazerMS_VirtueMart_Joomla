@@ -48,6 +48,12 @@ Installations
 
 10. Save the configuration and test with our sandbox account.
 
+11. Login into MOLPay Merchant Admin and set Callback URL
+
+  ``CallbackURL: http://shoppingcarturl/index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived`` 
+  
+*Replace `shoppingcarturl` with your shoppingcart domain 
+
 Contribution
 ------------
 
