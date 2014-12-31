@@ -1,0 +1,171 @@
+<?php
+/**
+ *
+ * MOLPay payment plugin
+ *
+ * @author MOLPay Teams
+ * @author MOLPay Teams
+ * @version $Id: molpay.php 5427 2014-12-30 01:12:00 $
+ * @package VirtueMart
+ * @subpackage payment
+ * Copyright (C) 2011 - 2014 MOLPay Team. All rights reserved.
+ * @license http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+ * VirtueMart is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See /administrator/components/com_virtuemart/COPYRIGHT.php for copyright notices and details.
+ *
+ * http://virtuemart.net
+ */
+
+defined('_JEXEC') or die('Restricted access');
+if (!class_exists('vmPSPlugin')) {
+	require(JPATH_VM_PLUGINS . DS . 'vmpsplugin.php');
+}
+
+class plgVmPaymentMOLPay extends vmPSPlugin {
+
+	private $_errormessage = array();
+	public $approved;
+	public $declined;
+	public $error;
+	public $held;
+
+	const APPROVED = 1;
+	const DECLINED = 2;
+	const ERROR = 3;
+	const HELD = 4;
+
+	const MOLPAY_DEFAULT_PAYMENT_CURRENCY = "MYR";
+
+	/**
+	 * Constructor
+	 *
+	 * For php4 compatability we must not use the __constructor as a constructor for plugins
+	 * because func_get_args ( void ) returns a copy of all passed arguments NOT references.
+	 * This causes problems with cross-referencing necessary for the observer design pattern.
+	 *
+	 * @param object $subject The object to observe
+	 * @param array $config  An array that holds the plugin configuration
+	 */
+	// instance of class
+	function __construct(& $subject, $config) {
+
+		parent::__construct($subject, $config);
+
+		$this->_loggable = TRUE;
+		$this->_tablepkey = 'id';
+		$this->_tableId = 'id';
+		$this->tableFields = array_keys($this->getTableSQLFields());
+		$varsToPush = array(
+										'molpay_merchantid'	=> array('', 'int'),
+										'molpay_verifykey'	=> array('', 'char'),
+										'status_pending'		=> array('', 'char'),
+										'status_success'		=> array('', 'char'),
+										'status_canceled'		=> array('', 'char')
+									);
+
+		$this->setConfigParameterable($this->_configTableFieldName, $varsToPush);
+	}
+
+	protected function getVmPluginCreateTableSQL() {
+		return $this->createTableSQL('MOLPay Table');
+	}
+
+	function getTableSQLFields() {
+
+		$SQLfields = array(
+			'id' => 'int(1) UNSIGNED NOT NULL AUTO_INCREMENT',
+			'virtuemart_order_id' => 'int(1) UNSIGNED',
+			'order_number' => 'char(64)',
+			'virtuemart_paymentmethod_id' => 'mediumint(1) UNSIGNED',
+			'payment_name' => 'varchar(5000)',
+			'payment_order_total' => 'decimal(15,5) NOT NULL',
+			'payment_currency' => 'smallint(1)',
+			'return_context' => 'char(255)',
+			'cost_per_transaction' => 'decimal(10,2)',
+			'cost_percent_total' => 'char(10)',
+			'tax_id' => 'smallint(1)',
+			'molpayresponse_raw' => 'text'
+		);
+
+		return $SQLfields;
+	}
+
+	/**
+	 * Reimplementation of vmPaymentPlugin::plgVmOnConfirmedOrder()
+	 *
+	 * @link http://www.authorize.net/support/AIM_guide.pdf
+	 * Credit Cards Test Numbers
+	 * Visa Test Account           4007000000027
+	 * Amex Test Account           370000000000002
+	 * Master Card Test Account    6011000000000012
+	 * Discover Test Account       5424000000000015
+	 * @author Valerie Isaksen
+	 */
+	function plgVmConfirmedOrder(VirtueMartCart $cart, $order) {
+	{
+		if (!($method = $this->getVmPluginMethod($order['details']['BT']->virtuemart_paymentmethod_id))) {
+			return NULL; // Another method was selected, do nothing
+		}
+		if (!$this->selectedThisElement($method->payment_element)) {
+			return FALSE;
+		}
+
+		$this->setInConfirmOrder($cart);
+		$usrBT = $order['details']['BT'];
+		$usrST = ((isset($order['details']['ST'])) ? $order['details']['ST'] : $order['details']['BT']);
+		$session = JFactory::getSession();
+		$return_context = $session->getId();
+
+		$new_status = '';
+
+		$payment_currency_id = shopFunctions::getCurrencyIDByName(self::MOLPAY_DEFAULT_PAYMENT_CURRENCY);
+		$totalInPaymentCurrency = vmPSPlugin::getAmountInCurrency($order['details']['BT']->order_total, $payment_currency_id);
+		$cd = CurrencyDisplay::getInstance($cart->pricesCurrency);
+
+		//vcode
+		$vcode = md5($totalInPaymentCurrency . $method->molpay_merchantid . $usrBT->order_number . $method->molpay_verifykey);
+
+		$post_variables = Array(
+			'vcode' => $vcode,
+			'bill_name' => $usrST->first_name." ".$usrST->last_name,
+			'bill_email' => $usrST->email,
+			'bill_mobile' => $usrBT->phone_1,
+			'country' => ShopFunctions::getCountryByID($usrST->virtuemart_country_id),
+			'orderid' => $usrBT->order_number,
+			"amount" => $totalInPaymentCurrency,
+			"cur" => $cd,
+			"bill_desc" => "Order No: ".$usrBT->order_number,
+			"returnurl" => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived')
+		);
+
+		// Prepare data that should be stored in the database
+		$dbValues['order_number'] = $usrBT->order_number;
+		$dbValues['virtuemart_order_id'] = $usrBT->virtuemart_order_id;
+		$dbValues['payment_method_id'] = $usrBT->virtuemart_paymentmethod_id;
+		$dbValues['return_context'] = $return_context;
+		$dbValues['payment_name'] = parent::renderPluginName($method);
+		$dbValues['cost_per_transaction'] = $method->cost_per_transaction;
+		$dbValues['cost_percent_total'] = $method->cost_percent_total;
+		$dbValues['payment_order_total'] = $totalInPaymentCurrency;
+		$dbValues['payment_currency'] = $payment_currency_id;
+		$this->storePSPluginInternalData($dbValues);
+
+		$html.= '<form action="https://www.onlinepayment.com.my/NBepay/pay/'.$method->molpay_merchantid.'/index.php" method="post" name="vm_molpay_form" >';
+		$html.= '<input type="image" name="submit" alt="Click to pay with MOLPay!" />';
+		foreach ($post_variables as $name => $value) 
+		{
+			$html.= '<input type="hidden" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
+		}
+		$html.= '</form>';
+		
+		$html .= ' <script type="text/javascript">';
+		$html .= ' document.vm_molpay_form.submit();';
+		$html .= ' </script>';
+		$this->debugLog( $post_variables, "plgVmConfirmedOrder", 'debug');
+	}
+
+}
+?>

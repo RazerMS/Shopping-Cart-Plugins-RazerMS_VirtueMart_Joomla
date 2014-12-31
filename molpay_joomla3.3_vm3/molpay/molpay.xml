@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="2.5" type="plugin" group="vmpayment" method="upgrade">
+	<name>MOLPay - Leading Payment Gateway in Southeast Asia</name>
+	<creationDate>December 30 2014</creationDate>
+	<author>The MOLPay Development Team</author>
+	<authorUrl>http://molpay.com</authorUrl>
+	<copyright>Copyright (C) 2011 - 2014 MOLPay Team. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+	<version>3.0.1</version>
+	<description>MOLPay | The leading payment gateway in South East Asia Grow your business with MOLPay payment solutions &amp; free features: Physical Payment at 7-Eleven, Seamless Checkout, Tokenization, Loyalty Program and more</description>
+
+	<files>
+		<filename plugin="molpay">molpay.php</filename>
+		<folder>language</folder>
+	</files>
+
+	<vmconfig>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/plugins/vmpayment/molpay/molpay/fields">
+				
+				<!-- Note: MOLPay production merchant setting -->
+				<field type="vmtitle" default="VMPAYMENT_MOLPAY_LIVE_PARAMS" level="level1"/>
+				<field name="molpay_merchantid" type="text" size="50" default="" label="VMPAYMENT_MOLPAY_LOGIN_ID" description="VMPAYMENT_MOLPAY_LOGIN_ID_DESC"/>
+				<field name="molpay_verifykey" type="text" size="70" default="" label="VMPAYMENT_MOLPAY_TRANSACTION_KEY" description="VMPAYMENT_MOLPAY_TRANSACTION_KEY_DESC"/>
+
+				<!-- Note: Shopping cart transaction status mapping -->
+				<field type="vmtitle" default="VMPAYMENT_MOLPAY_ORDER_STATUS_PARAMS" level="level1"/>
+				<field name="status_success" type="vmorderstate" scope="com_virtuemart" default="C" 
+					label="VMPAYMENT_MOLPAY_ORDERSTATUS_APPROVED" description="VMPAYMENT_MOLPAY_ORDERSTATUS_SUCCESS_DESC"/>
+				<field name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="X"
+					label="VMPAYMENT_MOLPAY_ORDERSTATUS_DECLINED" description="VMPAYMENT_MOLPAY_ORDERSTATUS_INVALID_DESC"/>
+				<field name="status_pending" type="vmorderstate" scope="com_virtuemart" default="P"
+					label="VMPAYMENT_MOLPAY_ORDERSTATUS_HELD" description="VMPAYMENT_MOLPAY_ORDERSTATUS_HELD_DESC"/>
+
+			</fieldset>
+		</fields>
+	</vmconfig>
+
+</extension>
