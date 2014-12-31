@@ -6,9 +6,9 @@ MOLPay Plugin for Joomla VirtueMart Shopping Cart developed by MOLPay R&D team.
 
 Supported version
 -----------------
-[Joomla 2.5.x and VirtueMart 2.6.x above](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip)
+[Joomla 2.5.x and VirtueMart 2.6.x above](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true)
 
-[Joomla 3.3.x and VirtueMart 3.x.x below](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip)
+[Joomla 3.3.x and VirtueMart 3.x.x below](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true)
 
 Notes
 -----
@@ -23,11 +23,11 @@ Installations
 
 1. Download or clone this repository.
 
-2. Copy [molpay_joomla2.5_vm.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip) or [molpay_joomla3.3_vm3.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip) from distribution folder.
+2. Copy [molpay_joomla2.5_vm.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true) or [molpay_joomla3.3_vm3.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true) from distribution folder.
 
 3. Login into joomla administration panel and navigate to Extension -> Extension Manager.
 
-4. At field Upload Package File, Upload and Install the [molpay_joomla2.5_vm.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip) or [molpay_joomla3.3_vm3.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip).
+4. At field Upload Package File, Upload and Install the [molpay_joomla2.5_vm.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true) or [molpay_joomla3.3_vm3.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true).
 
 5. At the same page, click manage and find VMPAYMENT_MOLPAY from the list and ensure the status is enable (color green).
 
