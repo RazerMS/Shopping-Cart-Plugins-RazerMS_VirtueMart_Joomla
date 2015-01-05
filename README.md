@@ -8,7 +8,7 @@ Supported version
 -----------------
 [Joomla 2.5.x and VirtueMart 2.6.x above](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true)
 
-[Joomla 3.3.x and VirtueMart 3.x.x below](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true)
+[Joomla 3.3.x and VirtueMart 3.x.x above](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true)
 
 Notes
 -----
