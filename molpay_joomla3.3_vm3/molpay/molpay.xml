@@ -6,7 +6,7 @@
 	<authorUrl>http://molpay.com</authorUrl>
 	<copyright>Copyright (C) 2011 - 2014 MOLPay Team. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 	<description>MOLPay | The leading payment gateway in South East Asia Grow your business with MOLPay payment solutions &amp; free features: Physical Payment at 7-Eleven, Seamless Checkout, Tokenization, Loyalty Program and more</description>
 
 	<files>
@@ -31,6 +31,13 @@
 					label="VMPAYMENT_MOLPAY_ORDERSTATUS_DECLINED" description="VMPAYMENT_MOLPAY_ORDERSTATUS_INVALID_DESC"/>
 				<field name="status_pending" type="vmorderstate" scope="com_virtuemart" default="P"
 					label="VMPAYMENT_MOLPAY_ORDERSTATUS_HELD" description="VMPAYMENT_MOLPAY_ORDERSTATUS_HELD_DESC"/>
+
+				<!-- Note: Optional parameters -->
+				<field type="vmtitle" default="VMPAYMENT_MOLPAY_OPTION_PARAMS" level="level1"/>
+				<field name="countries" type="vmcountries" scope="com_virtuemart" default=""
+							 label="VMPAYMENT_MOLPAY_COUNTRIES_DESC" description="VMPAYMENT_MOLPAY_COUNTRIES_DESC"/>
+				<field name="min_amount" type="text" default="1.01" label="VMPAYMENT_MOLPAY_MIN_AMOUNT" description="VMPAYMENT_MOLPAY_MIN_AMOUNT_DESC"/>
+				<field name="max_amount" type="text" default="50000.00" label="VMPAYMENT_MOLPAY_MAX_AMOUNT" description="VMPAYMENT_MOLPAY_MAX_AMOUNT_DESC"/>
 
 			</fieldset>
 		</fields>

@@ -43,7 +43,16 @@ class plgVMPaymentMolpay extends vmPSPlugin
 			'molpay_verifykey'	=> array('', 'char'),
 			'status_pending'		=> array('', 'char'),
 			'status_success'		=> array('', 'char'),
-			'status_canceled'		=> array('', 'char')
+			'status_canceled'		=> array('', 'char'),
+			'payment_logos' => array('', 'char'),
+			
+			//Restrictions
+			'min_amount' => array('', 'float'),
+			'max_amount' => array('', 'float'),
+
+			//discount
+			'cost_per_transaction' => array('', 'float'),
+			'cost_percent_total' => array('', 'char'),
 		);
 	
 		$this->setConfigParameterable($this->_configTableFieldName, $varsToPush);
@@ -82,7 +91,6 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		}
 		$session = JFactory::getSession();
 		$return_context = $session->getId();
-		$this->_debug = $method->debug;
 	
 		if (!class_exists('VirtueMartModelOrders'))		{ require(JPATH_VM_ADMINISTRATOR . DS . 'models' . DS . 'orders.php' ); }
 		if (!class_exists('VirtueMartModelCurrency'))	{ require(JPATH_VM_ADMINISTRATOR . DS . 'models' . DS . 'currency.php'); }
@@ -97,7 +105,7 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		$vendor = $vendorModel->getVendor();
 		$this->getPaymentCurrency($method);
 		$q = 'SELECT `currency_code_3` FROM `#__virtuemart_currencies` WHERE `virtuemart_currency_id`="' . $method->payment_currency . '" ';
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery($q);
 		$currency_code_3 = $db->loadResult();
 	
@@ -106,8 +114,8 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		$cd = CurrencyDisplay::getInstance($cart->pricesCurrency);
 		
 		//to get RM
-		$countryquery = 'SELECT `country_2_code` FROM `#__virtuemart_countries` WHERE `virtuemart_country_id`="' . $method->virtuemart_country_id . '" ';
-		$dbs = &JFactory::getDBO();
+		$countryquery = 'SELECT `country_2_code` FROM `#__virtuemart_countries` WHERE `virtuemart_country_id`="' . $address->virtuemart_country_id . '" ';
+		$dbs = JFactory::getDBO();
 		$dbs->setQuery($countryquery);
 		$country = $dbs->loadResult();
 		
@@ -116,7 +124,7 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		
 		//mart name
 		$martquery = 'SELECT `vendor_store_name` FROM `#__virtuemart_vendors_en_gb` WHERE `virtuemart_vendor_id`="' . $method->virtuemart_vendor_id . '" ';
-		$dbs = &JFactory::getDBO();
+		$dbs = JFactory::getDBO();
 		$dbs->setQuery($martquery);
 		$martname = $dbs->loadResult();
 		
@@ -144,7 +152,7 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		$this->storePSPluginInternalData($dbValues);
 		
 		// add spin image
-		$html.= '<form action="https://www.onlinepayment.com.my/MOLPay/pay/'.$method->molpay_merchantid.'/index.php" method="post" name="vm_molpay_form" >';
+		$html = '<form action="https://www.onlinepayment.com.my/MOLPay/pay/'.$method->molpay_merchantid.'/index.php" method="post" name="vm_molpay_form" >';
 		$html.= '<input type="image" name="submit" alt="Click to pay with MOLPay!" />';
 		foreach ($post_variables as $name => $value) 
 		{
@@ -202,7 +210,7 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		}
 		
 		$vkey 			= $method->molpay_verifykey;
-		$nbcb 			= $payment_data['nbcb'];
+		$nbcb 			= ( isset($payment_data['nbcb']) ? $payment_data['nbcb'] : 0 );
 		$tranID 		= $payment_data['tranID'];
 		$status 		= $payment_data['status'];
 		$domain 		= $payment_data['domain'];
@@ -250,7 +258,7 @@ class plgVMPaymentMolpay extends vmPSPlugin
 				$PSPquery = "SELECT `virtuemart_order_id`, `order_number`, `virtuemart_paymentmethod_id`, `payment_name`, `payment_order_total`, `payment_currency` "
 									. "  FROM ".$this->_tablename
 									. " WHERE `virtuemart_order_id` = '" . $virtuemart_order_id . "'";
-				$dbs = &JFactory::getDBO();
+				$dbs = JFactory::getDBO();
 				$dbs->setQuery($PSPquery);
 				$PSPRecords = $dbs->loadObjectList();
 				foreach (get_object_vars($PSPRecords[0]) as $k => $v) {
