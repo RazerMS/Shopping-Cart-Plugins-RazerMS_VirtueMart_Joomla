@@ -208,7 +208,7 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		{
 			return false;
 		}
-		
+		$payment_data['treq']	= '1';
 		$vkey 			= $method->molpay_verifykey;
 		$nbcb 			= ( isset($payment_data['nbcb']) ? $payment_data['nbcb'] : 0 );
 		$tranID 		= $payment_data['tranID'];
@@ -219,6 +219,23 @@ class plgVMPaymentMolpay extends vmPSPlugin
 		$appcode 		= $payment_data['appcode'];
 		$paydate 		= $payment_data['paydate'];
 		$skey 			= $payment_data['skey'];
+		
+		while ( list($k,$v) = each($_POST) ) {
+		$postData[]= $k."=".$v;
+		}
+		$postdata = implode("&",$postData);
+		$url = "https://www.onlinepayment.com.my/MOLPay/API/chkstat/returnipn.php";
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_POST , 1 );
+		curl_setopt($ch, CURLOPT_POSTFIELDS , $postdata );
+		curl_setopt($ch, CURLOPT_URL , $url );
+		curl_setopt($ch, CURLOPT_HEADER , 1 );
+		curl_setopt($ch, CURLINFO_HEADER_OUT , TRUE );
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER , 1 );
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , FALSE);
+		curl_setopt($ch, CURLOPT_SSLVERSION , CURL_SSLVERSION_TLSv1 );
+		$result = curl_exec( $ch );
+		curl_close( $ch );
 		
 		$key0 = md5( $tranID.$order_number.$status.$domain.$amount.$currency );
 		$key1 = md5( $paydate.$domain.$key0.$appcode.$vkey );
