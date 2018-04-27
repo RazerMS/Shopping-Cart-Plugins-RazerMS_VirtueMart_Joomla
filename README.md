@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/38641542/39344583-da87c94e-4a15-11e8-9ad4-b2b52165cfe0.jpg>
+<img src="https://user-images.githubusercontent.com/38641542/39344583-da87c94e-4a15-11e8-9ad4-b2b52165cfe0.jpg">
           
 MOLPay Joomla VirtueMart Plugin
 =====================
