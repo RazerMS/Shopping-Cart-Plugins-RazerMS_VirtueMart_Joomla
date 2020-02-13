@@ -1,9 +1,10 @@
-<img src="https://user-images.githubusercontent.com/38641542/74403936-f78a8280-4e63-11ea-9c7a-65c68ace75cb.jpg">
           
 Razer Merchant Services Joomla VirtueMart Plugin
 =====================
 
-MOLPay Plugin for Joomla VirtueMart Shopping Cart developed by Razer Merchant Services R&D team.
+<img src="https://user-images.githubusercontent.com/38641542/74403936-f78a8280-4e63-11ea-9c7a-65c68ace75cb.jpg">
+
+Razer Merchant Services Plugin for Joomla VirtueMart Shopping Cart developed by Razer Merchant Services R&D team.
 
 
 Supported version
@@ -17,7 +18,7 @@ Notes
 
 MOLPay Sdn. Bhd. is not responsible for any problems that might arise from the use of this module. 
 Use at your own risk. Please backup any critical data before proceeding. For any query or 
-assistance, please email support@molpay.com 
+assistance, please email support-sa@razer.com 
 
 
 Installations
