@@ -2,7 +2,7 @@
 Razer Merchant Services Joomla VirtueMart Plugin
 =====================
 
-<img src="https://user-images.githubusercontent.com/38641542/74403936-f78a8280-4e63-11ea-9c7a-65c68ace75cb.jpg">
+<img src="https://user-images.githubusercontent.com/38641542/74416380-08e18800-4e80-11ea-9be4-3c3c211ffb9e.jpg">
 
 Razer Merchant Services Plugin for Joomla VirtueMart Shopping Cart developed by Razer Merchant Services R&D team.
 
