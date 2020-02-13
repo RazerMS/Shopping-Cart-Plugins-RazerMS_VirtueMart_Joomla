@@ -1,16 +1,16 @@
-<img src="https://user-images.githubusercontent.com/38641542/39344583-da87c94e-4a15-11e8-9ad4-b2b52165cfe0.jpg">
+<img src="https://user-images.githubusercontent.com/38641542/74403936-f78a8280-4e63-11ea-9c7a-65c68ace75cb.jpg">
           
-MOLPay Joomla VirtueMart Plugin
+Razer Merchant Services Joomla VirtueMart Plugin
 =====================
 
-MOLPay Plugin for Joomla VirtueMart Shopping Cart developed by MOLPay R&D team.
+MOLPay Plugin for Joomla VirtueMart Shopping Cart developed by Razer Merchant Services R&D team.
 
 
 Supported version
 -----------------
-[Joomla 2.5.x and VirtueMart 2.6.x above](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true)
+[Joomla 2.5.x and VirtueMart 2.6.x above](https://github.com/RazerMS/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true)
 
-[Joomla 3.3.x and VirtueMart 3.x.x above](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true)
+[Joomla 3.3.x and VirtueMart 3.x.x above](https://github.com/RazerMS/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true)
 
 Notes
 -----
@@ -25,11 +25,11 @@ Installations
 
 1. Download or clone this repository.
 
-2. Copy [molpay_joomla2.5_vm.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true) or [molpay_joomla3.3_vm3.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true) from distribution folder.
+2. Copy [molpay_joomla2.5_vm.zip](https://github.com/RazerMS/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true) or [molpay_joomla3.3_vm3.zip](https://github.com/RazerMS/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true) from distribution folder.
 
 3. Login into joomla administration panel and navigate to Extension -> Extension Manager.
 
-4. At field Upload Package File, Upload and Install the [molpay_joomla2.5_vm.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true) or [molpay_joomla3.3_vm3.zip](https://github.com/MOLPay/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true).
+4. At field Upload Package File, Upload and Install the [molpay_joomla2.5_vm.zip](https://github.com/RazerMS/VirtueMart_Plugin/blob/master/distribution/molpay_joomla2.5_vm2.zip?raw=true) or [molpay_joomla3.3_vm3.zip](https://github.com/RazerMS/VirtueMart_Plugin/blob/master/distribution/molpay_joomla3.3_vm3.zip?raw=true).
 
 5. At the same page, click manage and find VMPAYMENT_MOLPAY from the list and ensure the status is enable (color green).
 
@@ -67,16 +67,16 @@ You can contribute to this plugin by sending the pull request to this repository
 Issues
 ------------
 
-Submit issue to this repository or email to our support@molpay.com
+Submit issue to this repository or email to our support-sa@razer.com
 
 
 Support
 -------
 
-Merchant Technical Support / Customer Care : support@molpay.com <br>
-Sales/Reseller Enquiry : sales@molpay.com <br>
-Marketing Campaign : marketing@molpay.com <br>
-Channel/Partner Enquiry : channel@molpay.com <br>
-Media Contact : media@molpay.com <br>
-R&D and Tech-related Suggestion : technical@molpay.com <br>
-Abuse Reporting : abuse@molpay.com
+Merchant Technical Support / Customer Care : support-sa@razer.com <br>
+Sales/Reseller Enquiry : sales-sa@razer.com <br>
+Marketing Campaign : marketing-sa@razer.com <br>
+Channel/Partner Enquiry : channel-sa@razer.com <br>
+Media Contact : media-sa@razer.com <br>
+R&D and Tech-related Suggestion : technical-sa@razer.com <br>
+Abuse Reporting : abuse-sa@razer.com
